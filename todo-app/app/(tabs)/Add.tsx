@@ -7,24 +7,17 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import { Task } from '../../types/task';
-import { mockTasks } from '../../data/tasks';
+import { useTaskContext } from '@/contexts/TaskContext';
 import TaskItem from '@/components/TaskItem';
 
 export default function TasksScreen() {
-  const [tasks, setTasks] = useState<Task[]>(mockTasks);
-  const [newTitle, setNewTitle] = useState<string>('');
-  const [newDescription, setNewDescription] = useState<string>('');
+  const { tasks, addTask, deleteTask, toggleTask } = useTaskContext();
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
 
-  const addTask = () => {
+  const handleAddTask = () => {
     if (newTitle.trim()) {
-      const newTask: Task = {
-        id: Date.now().toString(),
-        title: newTitle,
-        description: newDescription,
-        completed: false,
-      };
-      setTasks((prev) => [...prev, newTask]);
+      addTask(newTitle, newDescription);
       setNewTitle('');
       setNewDescription('');
     }
@@ -32,7 +25,7 @@ export default function TasksScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>📝 Add a New Task</Text>
+      <Text style={styles.heading}>Add a New Task</Text>
       <TextInput
         placeholder="Title"
         value={newTitle}
@@ -45,25 +38,17 @@ export default function TasksScreen() {
         onChangeText={setNewDescription}
         style={styles.input}
       />
-      <Button title="Add Task" onPress={addTask} />
+      <Button title="Add Task" onPress={handleAddTask} />
 
-      <Text style={[styles.heading, { marginTop: 24 }]}>📋 Task List</Text>
+      <Text style={[styles.heading, { marginTop: 24 }]}>Task List</Text>
       <FlatList
         data={tasks}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TaskItem
             task={item}
-            onToggle={() =>
-              setTasks((prev) =>
-                prev.map((t) =>
-                  t.id === item.id ? { ...t, completed: !t.completed } : t
-                )
-              )
-            }
-            onDelete={() =>
-              setTasks((prev) => prev.filter((t) => t.id !== item.id))
-            }
+            onToggle={() => toggleTask(item.id)}
+            onDelete={() => deleteTask(item.id)}
           />
         )}
       />

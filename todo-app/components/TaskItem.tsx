@@ -17,8 +17,8 @@ export default function TaskItem({ task, onToggle, onDelete }: Props) {
           {task.title}
         </Text>
       </TouchableOpacity>
-      <Link href={`/(tabs)/[id]`} asChild>
-        <Text style={styles.link}>📝</Text>
+      <Link href={`/(tabs)/tasks/${task.id}`} asChild>
+        <Text style={styles.link}>Edit</Text>
       </Link>
       <TouchableOpacity onPress={onDelete}>
         <Text style={styles.deletetext}>Delete</Text>

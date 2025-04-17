@@ -17,6 +17,9 @@ export default function TaskDetailScreen() {
     if (task) {
       setTitle(task.title);
       setDescription(task.description);
+    } else {
+      setTitle('');
+      setDescription('');
     }
   }, [task]);
 
@@ -27,6 +30,14 @@ export default function TaskDetailScreen() {
       router.back();
     }
   };
+
+  if (!tasks.length) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading tasks...</Text>
+      </View>
+    );
+  }
 
   if (!task) {
     return (
