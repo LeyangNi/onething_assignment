@@ -17,11 +17,11 @@ export default function TaskItem({ task, onToggle, onDelete }: Props) {
           {task.title}
         </Text>
       </TouchableOpacity>
-      {/* <Link href={`/(tabs)/task/${task.id}`} asChild>
+      <Link href={`/(tabs)/[id]`} asChild>
         <Text style={styles.link}>📝</Text>
-      </Link> */}
+      </Link>
       <TouchableOpacity onPress={onDelete}>
-        <Text style={styles.link}>Delete</Text>
+        <Text style={styles.deletetext}>Delete</Text>
       </TouchableOpacity>
     </View>
   );
@@ -42,5 +42,9 @@ const styles = StyleSheet.create({
   link: {
     fontSize: 18,
     marginHorizontal: 8,
+  },
+  deletetext: {
+    color: 'red',
+    fontSize: 16,
   },
 });
