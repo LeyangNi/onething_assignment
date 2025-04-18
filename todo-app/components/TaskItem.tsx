@@ -13,12 +13,12 @@ export default function TaskItem({ task, onToggle, onDelete }: Props) {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onToggle} style={{ flex: 1 }}>
-        <Text style={task.completed ? styles.completed : undefined}>
+        <Text style={task.completed ? styles.completed : styles.taskstyle}>
           {task.title}
         </Text>
       </TouchableOpacity>
-      <Link href={`/(tabs)/tasks/${task.id}`} asChild>
-        <Text style={styles.link}>Edit</Text>
+      <Link href={`/tasks/${task.id}`} asChild>
+        <Text style={styles.edittext}>Edit</Text>
       </Link>
       <TouchableOpacity onPress={onDelete}>
         <Text style={styles.deletetext}>Delete</Text>
@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   completed: {
+    fontSize: 18,
+    marginHorizontal: 8,
     textDecorationLine: 'line-through',
     color: 'gray',
   },
@@ -46,5 +48,15 @@ const styles = StyleSheet.create({
   deletetext: {
     color: 'red',
     fontSize: 16,
+    marginHorizontal: 10,
+  },
+  edittext: {
+    color: 'green',
+    fontSize: 16,
+    marginHorizontal: 10,
+  },
+  taskstyle: {
+    fontSize: 18,
+    marginHorizontal: 8,
   },
 });

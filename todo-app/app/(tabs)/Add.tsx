@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
   Text,
+  Alert,
 } from 'react-native';
 import { useTaskContext } from '@/contexts/TaskContext';
 import TaskItem from '@/components/TaskItem';
@@ -20,6 +21,7 @@ export default function TasksScreen() {
       addTask(newTitle, newDescription);
       setNewTitle('');
       setNewDescription('');
+      Alert.alert('Added', 'Task added successfully!');
     }
   };
 
@@ -39,7 +41,6 @@ export default function TasksScreen() {
         style={styles.input}
       />
       <Button title="Add Task" onPress={handleAddTask} />
-
       <Text style={[styles.heading, { marginTop: 24 }]}>Task List</Text>
       <FlatList
         data={tasks}
@@ -52,6 +53,7 @@ export default function TasksScreen() {
           />
         )}
       />
+
     </View>
   );
 }

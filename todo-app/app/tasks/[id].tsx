@@ -49,7 +49,7 @@ export default function TaskDetailScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Editing Task: {task.id}</Text>
+      <Text style={styles.heading}>Editing Task: {title}</Text>
       <TextInput
         style={styles.input}
         placeholder="Title"
