@@ -13,15 +13,27 @@ export default function TaskItem({ task, onToggle, onDelete }: Props) {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onToggle} style={{ flex: 1 }}>
-        <Text style={task.completed ? styles.completed : undefined}>
+        <Text style={task.completed ? styles.completed : styles.taskstyle}>
           {task.title}
         </Text>
+        <Text style={task.completed ? styles.completedstatus : styles.pendingstatus}>
+          {task.completed ? 'Completed' : 'Pending'}
+      </Text>
       </TouchableOpacity>
-      {/* <Link href={`/(tabs)/task/${task.id}`} asChild>
-        <Text style={styles.link}>📝</Text>
-      </Link> */}
+
+      // add a view button to see the details of the task
+      <Link href={`/tasks/view/${task.id}`} asChild>
+        <Text style={styles.edittext}>View</Text>
+      </Link>
+
+      {/* <TouchableOpacity onPress={onToggle} style={{ flex: 0 }}>
+    
+      </TouchableOpacity> */}
+      <Link href={`/tasks/${task.id}`} asChild>
+        <Text style={styles.edittext}>Edit</Text>
+      </Link>
       <TouchableOpacity onPress={onDelete}>
-        <Text style={styles.link}>Delete</Text>
+        <Text style={styles.deletetext}>Delete</Text>
       </TouchableOpacity>
     </View>
   );
@@ -36,11 +48,38 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   completed: {
+    fontSize: 18,
+    marginHorizontal: 8,
     textDecorationLine: 'line-through',
     color: 'gray',
   },
   link: {
     fontSize: 18,
     marginHorizontal: 8,
+  },
+  pendingstatus: {
+    fontSize: 16,
+    marginHorizontal: 8,
+    color: 'blue', 
+  },
+  deletetext: {
+    color: 'red',
+    fontSize: 16,
+    marginHorizontal: 10,
+  },
+  edittext: {
+    color: 'green',
+    fontSize: 16,
+    marginHorizontal: 10,
+  },
+  taskstyle: {
+    fontSize: 18,
+    marginHorizontal: 8,
+  },
+  completedstatus:{
+    fontSize: 16,
+    marginHorizontal: 8,
+    textDecorationLine: 'line-through',
+    color: 'gray',
   },
 });

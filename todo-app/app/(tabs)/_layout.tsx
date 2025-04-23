@@ -1,8 +1,10 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { TaskProvider } from '@/contexts/TaskContext';
 
 export default function TabLayout() {
   return (
+    <TaskProvider>
     <Tabs>
       <Tabs.Screen
         name="Tasks"
@@ -23,5 +25,6 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
+    </TaskProvider>
   );
 }
