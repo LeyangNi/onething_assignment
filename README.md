@@ -29,15 +29,15 @@ This is a simple yet powerful task manager built using **React Native**, **Expo*
    ```bash
    npx expo start
    ```
-This will launch Expo Developer Tools in your browser.
+  This will launch Expo Developer Tools in your browser.
 
-You can then:
+  You can then:
 
-  Press i to run the iOS simulator (macOS only)
+  * Press i to run the iOS simulator (macOS only)
 
-  Press a to run the Android emulator
+  * Press a to run the Android emulator
 
-  Or scan the QR code with your Expo Go mobile app
+  * Or scan the QR code with your Expo Go mobile app
 
 
 
