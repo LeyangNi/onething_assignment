@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Link, useLocalSearchParams, useRouter } from 'expo-router';
 import { Text, View, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useTaskContext } from '@/contexts/TaskContext';
@@ -23,50 +23,26 @@ export default function TaskDetailScreen() {
     }
   }, [task]);
 
-  const handleSave = () => {
-    if (task) {
-      updateTask(task.id, title, description);
-      Alert.alert('Saved', 'Task updated!');
-      router.back();
-    }
-  };
-
   const returnBack = () => {
     router.back();
   };
 
-  if (!tasks.length) {
-    return (
-      <View style={styles.container}>
-        <Text>Loading tasks...</Text>
-      </View>
-    );
-  }
-
-  if (!task) {
-    return (
-      <View style={styles.container}>
-        <Text>Task not found</Text>
-      </View>
-    );
-  }
-
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Task: {title}</Text>
+      <Text style={styles.heading}>Details of Task: {title}</Text>
       <TextInput
         style={styles.input}
         placeholder="Title"
         value={title}
-        onChangeText={setTitle}
       />
       <TextInput
         style={styles.input}
         placeholder="Description"
         value={description}
-        onChangeText={setDescription}
       />
-      <Button title="Save Changes" onPress={handleSave} />
+      <Link href={`/tasks/${task?.id}`} asChild>
+        <Button title="Edit" />
+      </Link>
       <Button title="Back" onPress={returnBack} />
     </View>
   );

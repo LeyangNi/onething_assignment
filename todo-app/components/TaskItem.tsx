@@ -16,7 +16,19 @@ export default function TaskItem({ task, onToggle, onDelete }: Props) {
         <Text style={task.completed ? styles.completed : styles.taskstyle}>
           {task.title}
         </Text>
+        <Text style={task.completed ? styles.completedstatus : styles.pendingstatus}>
+          {task.completed ? 'Completed' : 'Pending'}
+      </Text>
       </TouchableOpacity>
+
+      // add a view button to see the details of the task
+      <Link href={`/tasks/view/${task.id}`} asChild>
+        <Text style={styles.edittext}>View</Text>
+      </Link>
+
+      {/* <TouchableOpacity onPress={onToggle} style={{ flex: 0 }}>
+    
+      </TouchableOpacity> */}
       <Link href={`/tasks/${task.id}`} asChild>
         <Text style={styles.edittext}>Edit</Text>
       </Link>
@@ -45,6 +57,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginHorizontal: 8,
   },
+  pendingstatus: {
+    fontSize: 16,
+    marginHorizontal: 8,
+    color: 'blue', 
+  },
   deletetext: {
     color: 'red',
     fontSize: 16,
@@ -58,5 +75,11 @@ const styles = StyleSheet.create({
   taskstyle: {
     fontSize: 18,
     marginHorizontal: 8,
+  },
+  completedstatus:{
+    fontSize: 16,
+    marginHorizontal: 8,
+    textDecorationLine: 'line-through',
+    color: 'gray',
   },
 });

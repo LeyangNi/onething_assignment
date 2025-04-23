@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Task } from '../types/task';
-import { mockTasks } from '../data/tasks';
+
 
 interface TaskContextType {
   tasks: Task[];
@@ -10,6 +10,21 @@ interface TaskContextType {
   deleteTask: (id: string) => void;
   toggleTask: (id: string) => void;
 }
+
+const mockTasks: Task[] = [
+  {
+    id: '1',
+    title: 'Task 1',
+    description: 'Description for Task 1',
+    completed: false,
+  },
+  {
+    id: '2',
+    title: 'Task 2',
+    description: 'Description for Task 2',
+    completed: true,
+  },
+];
 
 const STORAGE_KEY = 'tasks';
 
@@ -54,12 +69,15 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const updateTask = (id: string, title: string, description: string) => {
-    setTasks((prev) =>
-      prev.map((t) =>
-        t.id === id ? { ...t, title, description } : t
-      )
+    const updated = tasks.map((t) =>
+      t.id === id ? { ...t, title, description } : t
+    );
+    setTasks(updated);
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated)).catch((e) =>
+      console.error('Failed to update task:', e)
     );
   };
+  
 
   const deleteTask = (id: string) => {
     setTasks((prev) => prev.filter((t) => t.id !== id));
