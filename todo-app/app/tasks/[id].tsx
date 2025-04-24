@@ -13,6 +13,7 @@ export default function TaskDetailScreen() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
+  // Effect to set the title and description when the task changes
   useEffect(() => {
     if (task) {
       setTitle(task.title);
@@ -23,6 +24,7 @@ export default function TaskDetailScreen() {
     }
   }, [task]);
 
+  // Function to handle saving the edited task
   const handleSave = () => {
     if (task) {
       updateTask(task.id, title, description);
@@ -31,6 +33,7 @@ export default function TaskDetailScreen() {
     }
   };
 
+  // Function to return to the previous screen
   const returnBack = () => {
     router.back();
   };
@@ -66,7 +69,9 @@ export default function TaskDetailScreen() {
         value={description}
         onChangeText={setDescription}
       />
+      // Button to save changes after editing
       <Button title="Save Changes" onPress={handleSave} />
+      // Button to return to the previous screen
       <Button title="Back" onPress={returnBack} />
     </View>
   );

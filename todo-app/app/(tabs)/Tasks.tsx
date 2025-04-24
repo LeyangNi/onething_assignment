@@ -1,3 +1,4 @@
+// Main landing screen to show the task list
 import React, { useState } from 'react';
 import {
   View,
@@ -18,30 +19,8 @@ export default function TasksScreen() {
 
   const router = useRouter();
 
-  const handleAddTask = () => {
-    if (newTitle.trim()) {
-      addTask(newTitle, newDescription);
-      setNewTitle('');
-      setNewDescription('');
-    }
-  };
-
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.heading}>Add a New Task</Text>
-      <TextInput
-        placeholder="Title"
-        value={newTitle}
-        onChangeText={setNewTitle}
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Description"
-        value={newDescription}
-        onChangeText={setNewDescription}
-        style={styles.input}
-      />
-      <Button title="Add Task" onPress={handleAddTask} /> */}
 
       <Text style={[styles.heading, { marginTop: 24 }]}>Task List</Text>
       <FlatList
@@ -54,6 +33,7 @@ export default function TasksScreen() {
             onDelete={() => deleteTask(item.id)}
           />
         )}
+        // add a button to add a new task
         ListFooterComponent={
           <View style={{ marginTop: 20 }}>
             <Button title="Add a New Task" onPress={() => router.push('/Add')} />
