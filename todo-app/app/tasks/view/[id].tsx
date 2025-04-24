@@ -8,11 +8,13 @@ export default function TaskDetailScreen() {
   const router = useRouter();
   const { tasks, updateTask } = useTaskContext();
 
+  // Find the task by ID
   const task = tasks.find((t) => t.id === id);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
+  // Effect to set the title and description when the task changes
   useEffect(() => {
     if (task) {
       setTitle(task.title);
@@ -23,6 +25,7 @@ export default function TaskDetailScreen() {
     }
   }, [task]);
 
+  // Function to handle saving the edited task
   const returnBack = () => {
     router.back();
   };

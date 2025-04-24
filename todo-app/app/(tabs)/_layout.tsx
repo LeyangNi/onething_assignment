@@ -4,6 +4,9 @@ import { TaskProvider } from '@/contexts/TaskContext';
 
 export default function TabLayout() {
   return (
+    // Use the TaskProvider to wrap the Tabs
+    // This will provide the task context to all screens in the tabs
+    // This is the main layout for the tabs
     <TaskProvider>
     <Tabs>
       <Tabs.Screen

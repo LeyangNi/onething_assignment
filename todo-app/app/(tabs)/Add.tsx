@@ -1,3 +1,4 @@
+// This screen is for adding new tasks
 import React, { useState } from 'react';
 import {
   View,
@@ -16,6 +17,7 @@ export default function TasksScreen() {
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
 
+  // Function to handle adding a new task
   const handleAddTask = () => {
     if (newTitle.trim()) {
       addTask(newTitle, newDescription);
@@ -28,6 +30,8 @@ export default function TasksScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Add a New Task</Text>
+      
+      {/* Input field for a new task */}
       <TextInput
         placeholder="Title"
         value={newTitle}
@@ -40,6 +44,8 @@ export default function TasksScreen() {
         onChangeText={setNewDescription}
         style={styles.input}
       />
+
+      {/* Button to add a new task */}
       <Button title="Add Task" onPress={handleAddTask} />
       <Text style={[styles.heading, { marginTop: 24 }]}>Task List</Text>
       <FlatList
